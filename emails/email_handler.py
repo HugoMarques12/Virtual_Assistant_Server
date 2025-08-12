@@ -11,6 +11,11 @@ class EmailHandler:
             return False
         except:
             return True
+        
+    def selectInbox(self):
+        self.imap.folder.set("INBOX")
+        messages = self.imap.fetch(AND(seen=False), mark_seen=False)
+        return list(messages)
 
 
 if __name__ == "__main__":

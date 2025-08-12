@@ -16,9 +16,21 @@ class EmailHandler:
         self.imap.folder.set("INBOX")
         messages = self.imap.fetch(AND(seen=False), mark_seen=False)
         return list(messages)
+    
+    def verifyNewEmails(self):
+        messages = self.selectInbox()
+        if len(messages) == 1:
+            return f"Você tem {len(messages)} email novo."
+        
+        if len(messages) > 1:
+            return f"Você tem {len(messages)} emails novos."
+        
+        return "Nenhum Email novo."
 
 
 if __name__ == "__main__":
     email_handler = EmailHandler()
     if email_handler.login():
         print("Erro ao fazer login. Verifique suas credenciais.")
+
+    print(email_handler.verifyNewEmails())

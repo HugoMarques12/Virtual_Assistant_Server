@@ -1,2 +1,7 @@
-# AI_ASSISTANT
-Objetivos
+# Virtual Assistant
+## Objetivos
+Criar uma API para o assistente virtual
+
+## Bibliotecas
+- Flask - Criar uma API para o assistente
+- Imap-tools - Gerenciar emails

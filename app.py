@@ -48,17 +48,33 @@ def openBrowser():
     }
 
     if url == 'email':
-        email_name = dados.get('emailName')
-        return jsonify({"message": browser_commands.email(email_name)})
-
-    return jsonify({"message": f'{methods[url]() if url in methods else "Site não encontrado"}'})
+        emailType = dados.get('emailType')
+        if emailType not in ['formal', 'jogos']:
+            return jsonify({"message": "O tipo de email deve ser 'formal' ou 'jogos'"})
+        
+        return jsonify({"url": browser_commands.email(emailType)})
+    
+    if url in methods:
+        return jsonify({"url": f'{methods[url]()}'})
+    
+    return jsonify({"message": "Site não encontrado"})
 
 @app.route('/browser/search', methods=['POST'])
 def search():
     dados = request.get_json()
     query = dados.get('query')
     site = dados.get('site')
-    return jsonify({"message": browser_commands.search(query, site)})
+
+    if query == None:
+        return jsonify({'message': 'Você não incluiu a chave "query" na requisição'})
+    
+    if site == None:
+        return jsonify({'message': 'Você não incluiu a chave "site" na requisição'})
+    
+    if site.lower() not in ['google', 'youtube']:
+        return jsonify({'message': 'O site deve ser "google" ou "youtube"'})
+    
+    return jsonify({"url": browser_commands.search(query.lower(), site.lower())})
 
 if __name__ == "__main__":
     app.run()

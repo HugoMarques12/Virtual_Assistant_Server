@@ -44,7 +44,8 @@ def openBrowser():
         'youtube': browser_commands.youtube,
         'google': browser_commands.google,
         'github': browser_commands.github,
-        'mangalivre': browser_commands.mangalivre
+        'mangalivre': browser_commands.mangalivre,
+        'chatgpt': browser_commands.chatgpt,
     }
 
     if url == 'email':

@@ -6,12 +6,12 @@ class BrowserHandler:
         self.config = ConfigParser()
         self.config.read('browser/urls.ini')
 
-    def email(self, emailName):
-        emailName = emailName.lower()
-        if emailName == 'jogos':
+    def email(self, emailType):
+        emailType = emailType.lower()
+        if emailType == 'jogos':
             return self.config.get('url', 'gmailvalente')
         
-        elif emailName == 'formal':
+        elif emailType == 'formal':
             return self.config.get('url', 'gmailmarques')
         
     def youtube(self):

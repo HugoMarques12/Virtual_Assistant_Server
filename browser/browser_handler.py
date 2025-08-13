@@ -4,27 +4,27 @@ from configparser import ConfigParser
 class BrowserHandler:
     def __init__(self):
         self.config = ConfigParser()
-        self.config.read('urls.ini')
+        self.config.read('browser/urls.ini')
 
     def email(self, emailName):
         emailName = emailName.lower()
         if emailName == 'jogos':
-            return self.config.get('URL', 'gmailmarques')
+            return self.config.get('url', 'gmailvalente')
         
         elif emailName == 'formal':
-            return self.config.get('URL', 'gmailvalentte')
+            return self.config.get('url', 'gmailmarques')
         
     def youtube(self):
-        return self.config.get('URL', 'youtube')
+        return self.config.get('url', 'youtube')
     
     def google(self):
-        return self.config.get('URL', 'google')
+        return self.config.get('url', 'google')
     
     def github(self):
-        return self.config.get('URL', 'github')
+        return self.config.get('url', 'github')
     
     def mangalivre(self):
-        return self.config.get('URL', 'mangalivre')
+        return self.config.get('url', 'mangalivre')
     
     def search(self, searchTerm, searchSite):
         searchSite = self.verifySiteSearch(searchSite)
@@ -37,3 +37,7 @@ class BrowserHandler:
         
         return 'https://www.google.com/search?q='
     
+if __name__ == "__main__":
+    browser_handler = BrowserHandler()
+    print(browser_handler.google())
+    print(browser_handler.mangalivre())

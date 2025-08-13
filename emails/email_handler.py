@@ -4,6 +4,7 @@ from imap_tools import MailBox, AND
 class EmailHandler:
     def __init__(self):
         self.imap = MailBox("imap.gmail.com")
+        self.loggedIn = self.login()
 
     def login(self):
         try:
@@ -26,11 +27,20 @@ class EmailHandler:
             return f"Você tem {len(messages)} emails novos."
         
         return "Nenhum Email novo."
+    
+    def getEmails(self):
+        messages = self.selectInbox()
+        texto = ''
+        for msg in messages:
+            texto += f"De: {msg.from_}\nAssunto: {msg.subject}\nData: {msg.date}\nCorpo: {msg.text.replace('\n', ' ')}\n\n"
+            if len(msg.attachments) > 0:
+                for attachment in msg.attachments:
+                    texto += f"Anexos: {attachment.filename}\n"
 
+        return texto
 
 if __name__ == "__main__":
     email_handler = EmailHandler()
-    if email_handler.login():
-        print("Erro ao fazer login. Verifique suas credenciais.")
-
-    print(email_handler.verifyNewEmails())
+    email_handler.login()
+    email_handler.getEmails()
+        

@@ -26,6 +26,9 @@ class BrowserHandler:
     def mangalivre(self):
         return self.config.get('url', 'mangalivre')
     
+    def chatgpt(self):
+        return self.config.get('url', 'chatgpt')
+    
     def search(self, searchTerm, searchSite):
         searchSite = self.verifySiteSearch(searchSite)
         searchTerm = searchTerm.replace(' ', '+')

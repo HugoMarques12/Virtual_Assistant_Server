@@ -24,6 +24,8 @@ class EmailCommands:
 
 email_commands = EmailCommands()
 browser_commands = BrowserHandler()
+
+
 app = Flask(__name__)
 
 @app.route('/emails/verify_emails')
@@ -51,6 +53,12 @@ def openBrowser():
 
     return jsonify({"message": f'{methods[url]() if url in methods else "Site não encontrado"}'})
 
+@app.route('/browser/search', methods=['POST'])
+def search():
+    dados = request.get_json()
+    query = dados.get('query')
+    site = dados.get('site')
+    return jsonify({"message": browser_commands.search(query, site)})
 
 if __name__ == "__main__":
     app.run()

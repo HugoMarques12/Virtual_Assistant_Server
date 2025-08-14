@@ -4,7 +4,7 @@ from configparser import ConfigParser
 class BrowserHandler:
     def __init__(self):
         self.config = ConfigParser()
-        self.config.read('browser/urls.ini')
+        self.config.read('urls.ini')
 
     def email(self, emailType):
         emailType = emailType.lower()

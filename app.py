@@ -47,6 +47,9 @@ class BrowserCommands:
             return {"url": f'{methods[url]()}'}
         
         return {'message': 'Não possuo esse site, favor cadastrar no banco de dados'}
+    
+    def search(self, site, query):
+        return {'url': self.browserHandler.search(query, site)}
 
 email_commands = EmailCommands()
 browser_commands = BrowserCommands()
@@ -86,9 +89,9 @@ def search():
         return jsonify({'message': 'Você não incluiu a chave "site" na requisição'}), 400
     
     if site.lower() not in ['google', 'youtube', 'github']:
-        return jsonify({'message': 'O site deve ser "google" ou "youtube"'}), 400
+        return jsonify({'message': 'O site deve ser "google", "youtube" ou "github"'}), 400
     
-    return jsonify({"url": browser_commands.search(query.lower(), site.lower())}), 200
+    return jsonify(browser_commands.search(site.lower(), query.lower())), 200
 
 
 if __name__ == "__main__":

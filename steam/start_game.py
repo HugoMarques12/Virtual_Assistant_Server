@@ -3,7 +3,7 @@ from __init__ import *
 import requests
 # from . import *
 
-class SteamAppList:
+class SteamApp:
     def __init__(self):
         self.apps = ConfigParser()
         self.apps.read('steam/appId.ini')
@@ -46,5 +46,5 @@ class SteamAppList:
 
 
 if __name__ == '__main__':
-    steamApp = SteamAppList()
+    steamApp = SteamApp()
     steamApp.getAppIds(['cyberpunk', "assassin's creed"])

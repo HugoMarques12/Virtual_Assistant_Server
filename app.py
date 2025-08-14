@@ -65,6 +65,12 @@ def readEmails():
 @app.route('/browser/open', methods=['POST'])
 def openBrowser():
     dados = request.get_json()
+    if 'site' in dados:
+        return jsonify({'message': 'você não disse o site.'}), 400
+        
+    elif dados['site'] == 'email' and any(key not in dados for key in ['site', 'emailType']):
+        return jsonify({'message': 'você não incluiu o tipo do email.'}), 400
+        
     return jsonify(browser_commands.openBrowser(dados)), 200
 
 @app.route('/browser/search', methods=['POST'])

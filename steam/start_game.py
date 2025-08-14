@@ -6,7 +6,7 @@ import requests
 class SteamAppList:
     def __init__(self):
         self.apps = ConfigParser()
-        self.apps.read('appId.ini')
+        self.apps.read('steam/appId.ini')
     
     def _normalizeGameNames(self, gameNames):
         if isinstance(gameNames, str):
@@ -14,7 +14,7 @@ class SteamAppList:
         elif isinstance(gameNames, list):
             return gameNames
         
-        raise TypeError("gameNames deve ser uma string ou uma lista de strings.")
+        raise TypeError('gameNames deve ser uma string ou uma lista de strings.')
     
     def getAppIds(self, gameNames):
         gameNames = self._normalizeGameNames(gameNames)
@@ -24,8 +24,9 @@ class SteamAppList:
 
         for app in response['applist']['apps']:
             if app['name'] in gameNames:
-                self.apps.append({"appId": app['appId'], "appName": app['name'].lower()})
+                self.apps.append({'appId': app['appId'], 'appName': app['name'].lower()})
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     steamApp = SteamAppList()
+    steamApp._saveFile()

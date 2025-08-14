@@ -22,8 +22,34 @@ class EmailCommands:
     def readEmails(self):
         return {"message": self.emailHandler.getEmails()}
 
+
+class BrowserCommands:
+    def __init__(self):
+        self.browserHandler = BrowserHandler()
+
+    def openBrowser(self, dados):
+        url = dados.get('site')
+        methods = {
+            'youtube': self.browserHandler.youtube,
+            'google': self.browserHandler.google,
+            'github': self.browserHandler.github,
+            'mangalivre': self.browserHandler.mangalivre,
+            'chatgpt': self.browserHandler.chatgpt,
+        }
+        if url == 'email':
+            emailType = dados.get('emailType')
+            if emailType not in ['formal', 'jogos']:
+                return {"message": "O tipo de email deve ser 'formal' ou 'jogos'"}
+            
+            return {"url": self.browserHandler.email(emailType)}
+    
+        if url in methods:
+            return {"url": f'{methods[url]()}'}
+        
+        return {'message': 'Não possuo esse site, favor cadastrar no banco de dados'}
+
 email_commands = EmailCommands()
-browser_commands = BrowserHandler()
+browser_commands = BrowserCommands()
 
 
 app = Flask(__name__)
@@ -39,26 +65,7 @@ def readEmails():
 @app.route('/browser/open', methods=['POST'])
 def openBrowser():
     dados = request.get_json()
-    url = dados.get('site')
-    methods = {
-        'youtube': browser_commands.youtube,
-        'google': browser_commands.google,
-        'github': browser_commands.github,
-        'mangalivre': browser_commands.mangalivre,
-        'chatgpt': browser_commands.chatgpt,
-    }
-
-    if url == 'email':
-        emailType = dados.get('emailType')
-        if emailType not in ['formal', 'jogos']:
-            return jsonify({"message": "O tipo de email deve ser 'formal' ou 'jogos'"})
-        
-        return jsonify({"url": browser_commands.email(emailType)})
-    
-    if url in methods:
-        return jsonify({"url": f'{methods[url]()}'})
-    
-    return jsonify({"message": "Site não encontrado"})
+    return jsonify(browser_commands.openBrowser(dados))
 
 @app.route('/browser/search', methods=['POST'])
 def search():
@@ -72,10 +79,11 @@ def search():
     if site == None:
         return jsonify({'message': 'Você não incluiu a chave "site" na requisição'})
     
-    if site.lower() not in ['google', 'youtube']:
+    if site.lower() not in ['google', 'youtube', 'github']:
         return jsonify({'message': 'O site deve ser "google" ou "youtube"'})
     
     return jsonify({"url": browser_commands.search(query.lower(), site.lower())})
+
 
 if __name__ == "__main__":
     app.run()

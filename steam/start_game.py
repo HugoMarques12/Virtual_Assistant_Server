@@ -1,7 +1,6 @@
 from configparser import ConfigParser
-from __init__ import *
 import requests
-# from . import *
+from . import *
 
 class SteamApp:
     def __init__(self):

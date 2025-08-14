@@ -31,9 +31,9 @@ class BrowserHandler:
     
     def search(self, searchTerm, searchSite):
         searchTerm = searchTerm.replace(' ', '+')
-        return self.verifySiteSearch(searchSite, searchTerm)
+        return self._verifySiteSearch(searchSite, searchTerm)
     
-    def verifySiteSearch(self, searchSite, searchTerm):
+    def _verifySiteSearch(self, searchSite, searchTerm):
         if 'youtube' in searchSite.lower():
             return 'https://www.youtube.com/results?search_query='
         

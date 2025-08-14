@@ -34,6 +34,15 @@ class SteamAppList:
                 self.apps.set('apps', app['name'].lower(), str(app['appid']))
 
         self._saveFile()
+        return self._verifyGames(gameNames)
+
+    def _verifyGames(self, games):
+        message = 'Jogos não encontrados '
+        for value in games:
+            if games[value]:
+                message += f'{value}, '
+        
+        return message
 
 
 if __name__ == '__main__':

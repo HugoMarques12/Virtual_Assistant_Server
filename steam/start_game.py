@@ -14,6 +14,14 @@ class SteamAppList:
     def _saveJsonFile(self):
         with open('steam/appId.json', 'w') as file:
             json.dump(self.apps, file, indent=4)
+    
+    def _normalizeGameNames(self, gameNames):
+        if isinstance(gameNames, str):
+            return [gameNames]
+        elif isinstance(gameNames, list):
+            return gameNames
+        
+        raise TypeError("gameNames deve ser uma string ou uma lista de strings.")
 
 
 if __name__ == "__main__":

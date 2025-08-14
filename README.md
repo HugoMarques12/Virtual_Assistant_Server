@@ -41,6 +41,7 @@ Após criar o ambiente virtual, ative ele utilizando o seguinte comando
 
 ### Instalando dependências
 Agora você deve instalar os pacotes e bibliotecas
+
 ```bash
 pip install -r requirements.txt
 ```

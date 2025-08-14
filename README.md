@@ -56,7 +56,7 @@ pip install -r requirements.txt
 
 **Descrição:** Verificar se vc tem novos emails.
 
-Response (200):
+**Response (200):**
 ```json
 {
   "message": "Você tem 10 email novos."

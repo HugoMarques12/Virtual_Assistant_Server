@@ -79,6 +79,7 @@ Response (200):
 
 **`POST /browser/open`**
 **Descrição:** Abrir site específico.
+
 **Body (JSON)**
 Se o usuario desejar abrir o tipo email, deve ser nesse formato:
 ```json
@@ -105,6 +106,7 @@ Caso contrário deve manter esse formato:
 
 **`POST /browser/search`**
 **Descrição:** Pesquisar assunto em determinado site
+
 **Body (JSON)**
 Deve ter o seguinte formato:
 ```json

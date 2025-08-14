@@ -16,6 +16,10 @@ class SteamAppList:
         
         raise TypeError('gameNames deve ser uma string ou uma lista de strings.')
     
+    def _saveFile(self):
+        with open('steam/appId.ini', 'w') as file:
+            self.apps.write(file)
+    
     def getAppIds(self, gameNames):
         gameNames = self._normalizeGameNames(gameNames)
         

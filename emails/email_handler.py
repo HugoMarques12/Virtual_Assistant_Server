@@ -21,10 +21,10 @@ class EmailHandler:
     def verifyNewEmails(self):
         messages = self.selectInbox()
         if len(messages) == 1:
-            return f"Você tem {len(messages)} email novo."
+            return f"Você tem 1 e-mail novo."
         
         if len(messages) > 1:
-            return f"Você tem {len(messages)} emails novos."
+            return f"Você tem {len(messages)} e-mails novos."
         
         return "Nenhum Email novo."
     

@@ -31,16 +31,16 @@ class BrowserHandler:
     
     def search(self, searchTerm, searchSite):
         searchTerm = searchTerm.replace(' ', '+')
-        return self.verifySiteSearch(searchSite, searchTerm)
+        return self._verifySiteSearch(searchSite, searchTerm)
     
-    def verifySiteSearch(self, searchSite, searchTerm):
+    def _verifySiteSearch(self, searchSite, searchTerm):
         if 'youtube' in searchSite.lower():
-            return 'https://www.youtube.com/results?search_query='
+            return f'https://www.youtube.com/results?search_query={searchTerm}'
         
         elif 'github' in searchSite.lower():
             return f'https://github.com/search?q={searchTerm}&type=repositories'
         
-        return 'https://www.google.com/search?q='
+        return f'https://www.google.com/search?q={searchTerm}'
     
 if __name__ == "__main__":
     browser_handler = BrowserHandler()

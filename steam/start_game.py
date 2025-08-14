@@ -31,7 +31,7 @@ class SteamApp:
         for app in response['applist']['apps']:
             if app['name'].lower() in gameNames:
                 gameNames[app['name'].lower()] = False
-                self.apps.set('apps', app['name'].lower(), str(app['appid']))
+                self.apps.set('apps', app['name'].lower().replace(' ', '_'), str(app['appid']))
 
         self._saveFile()
         return self._verifyGames(gameNames)
@@ -47,4 +47,4 @@ class SteamApp:
 
 if __name__ == '__main__':
     steamApp = SteamApp()
-    steamApp.getAppIds(['cyberpunk', "assassin's creed"])
+    steamApp.getAppIds(['cyberpunk 2077', "assassin's creed"])

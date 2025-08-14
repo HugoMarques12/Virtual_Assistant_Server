@@ -53,6 +53,7 @@ pip install -r requirements.txt
 ### 📧 E-mails
 
 **`GET /emails/verify_emails`**
+
 **Descrição:** Verificar se vc tem novos emails.
 
 Response (200):
@@ -63,6 +64,7 @@ Response (200):
 ```
 
 **`GET /emails/read_emails`**
+
 **Descrição:** Ler os emails novos não lidos.
 
 **Response (200):**
@@ -78,9 +80,11 @@ Response (200):
 ### 🌐 Navegador
 
 **`POST /browser/open`**
+
 **Descrição:** Abrir site específico.
 
 **Body (JSON)**
+
 Se o usuario desejar abrir o tipo email, deve ser nesse formato:
 ```json
 {
@@ -105,9 +109,11 @@ Caso contrário deve manter esse formato:
 ```
 
 **`POST /browser/search`**
-**Descrição:** Pesquisar assunto em determinado site
+
+**Descrição:** Pesquisar assunto em determinado site.
 
 **Body (JSON)**
+
 Deve ter o seguinte formato:
 ```json
 {

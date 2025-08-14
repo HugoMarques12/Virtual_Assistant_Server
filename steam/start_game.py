@@ -43,6 +43,10 @@ class SteamApp:
                 message += f'{value}, '
         
         return message
+    
+    def runGame(self, name):
+        id = self.apps.get('apps', name)
+        return f'steam://run/{id}'
 
 
 if __name__ == '__main__':

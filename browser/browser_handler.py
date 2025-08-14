@@ -30,16 +30,15 @@ class BrowserHandler:
         return self.config.get('url', 'chatgpt')
     
     def search(self, searchTerm, searchSite):
-        searchSite = self.verifySiteSearch(searchSite)
         searchTerm = searchTerm.replace(' ', '+')
-        return f"{searchSite}{searchTerm}"
+        return self.verifySiteSearch(searchSite, searchTerm)
     
-    def verifySiteSearch(self, searchSite):
+    def verifySiteSearch(self, searchSite, searchTerm):
         if 'youtube' in searchSite.lower():
             return 'https://www.youtube.com/results?search_query='
         
         elif 'github' in searchSite.lower():
-            return 'https://github.com/search?q='
+            return f'https://github.com/search?q={searchTerm}&type=repositories'
         
         return 'https://www.google.com/search?q='
     

@@ -21,3 +21,22 @@ Desenvolver uma API leve e eficiente que centralize funções cotidianas de um a
 - 🌐 Navegador
   - Abre sites pré-configurados: YouTube, Google, GitHub, MangaLivre, ChatGPT, E-mail
   - Pesquisa tópicos automaticamente no Google ou YouTube
+
+## Instalação
+### Criando ambiente virtual
+Criar um ambiente virtual python como o nome desejável, substituindo "nome da pasta" pelo nome que você desejar
+```
+python -m venv <nome da pasta>
+```
+
+### Ativar ambiente virtual
+Após criar o ambiente virtual, ative ele utilizando o seguinte comando
+```
+<nome da pasta>\Scripts\activate
+```
+
+### Instalando dependências
+Agora você deve instalar os pacotes e bibliotecas
+```
+pip install -r requirements.txt
+```

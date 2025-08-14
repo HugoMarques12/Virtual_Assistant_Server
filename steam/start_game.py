@@ -1,19 +1,12 @@
+from configparser import ConfigParser
+from __init__ import *
 import requests
 # from . import *
-import json
-from __init__ import *
 
 class SteamAppList:
     def __init__(self):
-        self.apps = self._openJsonFile()
-
-    def _openJsonFile(self):
-        with open('steam/appId.json', 'r') as file:
-            return json.load(file)
-        
-    def _saveJsonFile(self):
-        with open('steam/appId.json', 'w') as file:
-            json.dump(self.apps, file, indent=4)
+        self.apps = ConfigParser()
+        self.apps.read('appId.ini')
     
     def _normalizeGameNames(self, gameNames):
         if isinstance(gameNames, str):
@@ -32,8 +25,6 @@ class SteamAppList:
         for app in response['applist']['apps']:
             if app['name'] in gameNames:
                 self.apps.append({"appId": app['appId'], "appName": app['name'].lower()})
-
-        self._saveJsonFile()
 
 
 if __name__ == "__main__":

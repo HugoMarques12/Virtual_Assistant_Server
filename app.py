@@ -56,16 +56,16 @@ app = Flask(__name__)
 
 @app.route('/emails/verify_emails')
 def verifyEmails(): 
-    return jsonify(email_commands.verifyEmails())
+    return jsonify(email_commands.verifyEmails()), 200
 
 @app.route('/emails/read_emails')
 def readEmails():
-    return jsonify(email_commands.readEmails())
+    return jsonify(email_commands.readEmails()), 200
 
 @app.route('/browser/open', methods=['POST'])
 def openBrowser():
     dados = request.get_json()
-    return jsonify(browser_commands.openBrowser(dados))
+    return jsonify(browser_commands.openBrowser(dados)), 200
 
 @app.route('/browser/search', methods=['POST'])
 def search():
@@ -82,7 +82,7 @@ def search():
     if site.lower() not in ['google', 'youtube', 'github']:
         return jsonify({'message': 'O site deve ser "google" ou "youtube"'})
     
-    return jsonify({"url": browser_commands.search(query.lower(), site.lower())})
+    return jsonify({"url": browser_commands.search(query.lower(), site.lower())}), 200
 
 
 if __name__ == "__main__":

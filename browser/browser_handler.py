@@ -38,6 +38,9 @@ class BrowserHandler:
         if 'youtube' in searchSite.lower():
             return 'https://www.youtube.com/results?search_query='
         
+        elif 'github' in searchSite.lower():
+            return 'https://github.com/search?q='
+        
         return 'https://www.google.com/search?q='
     
 if __name__ == "__main__":

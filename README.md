@@ -50,6 +50,7 @@ pip install -r requirements.txt
 ## Endpoints API
 
 ### 📧 E-mails
+
 **`GET /emails/verify_emails`**
 **Descrição:** Verificar se vc tem novos emails.
 
@@ -63,12 +64,40 @@ Response (200):
 **`GET /emails/read_emails`**
 **Descrição:** Ler os emails novos não lidos.
 
-Response (200):
+**Response (200):**
 ```json
 {
   "from": "email@email.com",
   "subject": "API Assistente Virtual",
   "date": "yyyy-mm-dd hh:mm:ss-time-zone",
   "text": "Este é um exemplo de texto que pode vir na resposta"
+}
+```
+
+### 🌐 Navegador
+
+**`GET /browser/open`**
+**Descrição:** Abrir site específico
+**Body (JSON)**
+Se o usuario desejar abrir o tipo email, deve ser nesse formato:
+```json
+{
+  "site": "email",
+  "emailType": "formal"
+}
+```
+como "emailType" sendo "formal" ou "jogos"
+
+Caso contrário deve manter esse formato:
+```json
+{
+  "site": "youtube"
+}
+```
+
+**Response (200):**
+```json
+{
+  "url": "https://www.youtube.com/"
 }
 ```

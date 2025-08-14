@@ -80,13 +80,13 @@ def search():
     site = dados.get('site')
 
     if query == None:
-        return jsonify({'message': 'Você não incluiu a chave "query" na requisição'})
+        return jsonify({'message': 'Você não incluiu a chave "query" na requisição'}), 400
     
     if site == None:
-        return jsonify({'message': 'Você não incluiu a chave "site" na requisição'})
+        return jsonify({'message': 'Você não incluiu a chave "site" na requisição'}), 400
     
     if site.lower() not in ['google', 'youtube', 'github']:
-        return jsonify({'message': 'O site deve ser "google" ou "youtube"'})
+        return jsonify({'message': 'O site deve ser "google" ou "youtube"'}), 400
     
     return jsonify({"url": browser_commands.search(query.lower(), site.lower())}), 200
 

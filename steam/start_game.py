@@ -10,10 +10,10 @@ class SteamAppList:
     
     def _normalizeGameNames(self, gameNames):
         if isinstance(gameNames, str):
-            return {gameNames: False}
+            return {gameNames[0].lower(): True}
         
         elif isinstance(gameNames, list):
-            games = {item: False for item in gameNames}
+            games = {item.lower(): True for item in gameNames}
             return games
         
         raise TypeError('gameNames deve ser uma string ou uma lista de strings.')
@@ -29,12 +29,13 @@ class SteamAppList:
         response = response.json()
 
         for app in response['applist']['apps']:
-            if app['name'] in gameNames:
-                self.apps.set('apps', app['name'].lower(), app['appId'])
+            if app['name'].lower() in gameNames:
+                gameNames[app['name'].lower()] = False
+                self.apps.set('apps', app['name'].lower(), str(app['appid']))
 
         self._saveFile()
 
 
 if __name__ == '__main__':
     steamApp = SteamAppList()
-    steamApp._saveFile()
+    steamApp.getAppIds(['cyberpunk', "assassin's creed"])

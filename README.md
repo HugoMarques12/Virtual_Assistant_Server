@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 #### `GET /emails/verify_emails`
 
-**Descrição:** Verificar se vc tem novos emails.
+**Descrição:** Ao receber uma requisiao HTTP, a API verifica se vc tem novos emails e retorna uma mensagem com a quantidade de emails novos e não lidos.
 
 **Response (200):**
 ```json
@@ -65,7 +65,7 @@ pip install -r requirements.txt
 
 #### `GET /emails/read_emails`
 
-**Descrição:** Ler os emails novos não lidos.
+**Descrição:** Cliente faz uma requisição para esse endpointe a API retorna os dados dos emails novos não lidos.
 
 **Response (200):**
 ```json
@@ -81,20 +81,16 @@ pip install -r requirements.txt
 
 #### `POST /browser/open`
 
-**Descrição:** Abrir site específico.
+**Descrição:** Abrir site específico,o cliente deve enviar um json com a chave "site", caso o cliente faça uma requisição para o email, o json deverá conter as chaves "site" e "emailType", mostrarei abaixo.
 
 **Body (JSON)**
-
-Se o usuario desejar abrir o tipo email, deve ser nesse formato:
 ```json
 {
   "site": "email",
   "emailType": "formal"
 }
 ```
-como "emailType" sendo "formal" ou "jogos".
-
-Caso contrário deve manter esse formato:
+ou
 ```json
 {
   "site": "youtube"
@@ -110,7 +106,7 @@ Caso contrário deve manter esse formato:
 
 #### `POST /browser/search`
 
-**Descrição:** Pesquisar assunto em determinado site.
+**Descrição:** O cliente faz uma requisição HTTP para esse endpoint e a API retorna uma URL para o código cliente executar no navegador e abrir o site desejado com a pesquisa desejada.
 
 **Body (JSON)**
 

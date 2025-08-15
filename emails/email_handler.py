@@ -38,9 +38,4 @@ class EmailHandler:
                     texto += f"Anexos: {attachment.filename}\n"
 
         return texto
-
-if __name__ == "__main__":
-    email_handler = EmailHandler()
-    email_handler.login()
-    email_handler.getEmails()
         

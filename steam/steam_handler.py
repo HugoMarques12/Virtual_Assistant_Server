@@ -5,10 +5,10 @@ from . import *
 class SteamHandler:
     def __init__(self):
         self.apps = ConfigParser()
-        self.apps.read('steam/appId.ini')
+        self.apps.read('configs/appId.ini')
     
     def _saveFile(self):
-        with open('steam/appId.ini', 'w') as file:
+        with open('configs/appId.ini', 'w') as file:
             self.apps.write(file)
     
     def addGame(self, names):

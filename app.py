@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from emails.email_handler import *
 from browser.browser_handler import *
+from steam.steam_handler import *
 
 
 class EmailCommands:
@@ -93,6 +94,13 @@ def search():
     
     return jsonify(browser_commands.search(site.lower(), query.lower())), 200
 
+@app.route('/steam/run', methods=['POST'])
+def runGame():
+    data = request.get_json()
+    if 'gameName' not in data:
+        return jsonify({'message': 'você não incluiu o nome do jogo'})
+    
+    return jsonify()
 
 if __name__ == "__main__":
     app.run()

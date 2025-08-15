@@ -20,14 +20,14 @@ class BrowserCommands:
         if url == 'email':
             emailType = data.get('emailType')
             if emailType not in ['formal', 'jogos']:
-                return {"message": "O tipo de email deve ser 'formal' ou 'jogos'"}
+                return {"message": "o tipo de email deve ser 'formal' ou 'jogos'"}
             
             return {"url": self.browserHandler.email(emailType)}
     
         if url in methods:
             return {"url": f'{methods[url]()}'}
         
-        return {'message': 'Não possuo esse site, favor cadastrar no banco de dados'}
+        return {'message': 'não possuo esse site, favor cadastrar no banco de dados'}
     
     def search(self, site, query):
         return {'url': self.browserHandler.search(query, site)}

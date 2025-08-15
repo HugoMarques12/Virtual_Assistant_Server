@@ -40,13 +40,13 @@ browser_commands = BrowserCommands()
 def openBrowser():
     data = request.get_json()
 
-    chavesExtras = all(key in ['site', 'emailType'] for key in data.keys())
-    chavesFaltando = all(key in data.keys() for key in ['site', 'emailType'])
+    extraKeys = all(key in ['site', 'emailType'] for key in data.keys())
+    missingKeys = all(key in data.keys() for key in ['site', 'emailType'])
 
     if 'site' not in data:
         return jsonify({'message': 'você não disse o site.'}), 400
     
-    elif not chavesExtras and chavesFaltando:
+    elif not extraKeys and missingKeys:
         return jsonify({'message': ''})
         
     elif data['site'] == 'email' and any(key not in data for key in ['site', 'emailType']):

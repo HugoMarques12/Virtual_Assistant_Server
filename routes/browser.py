@@ -36,7 +36,7 @@ class BrowserCommands:
 browser_commands = BrowserCommands()
 
 
-@browserBp.route('/browser/open', methods=['POST'])
+@browserBp.route('/open', methods=['POST'])
 def openBrowser():
     data = request.get_json()
 
@@ -54,7 +54,7 @@ def openBrowser():
         
     return jsonify(browser_commands.openBrowser(data)), 200
 
-@browserBp.route('/browser/search', methods=['POST'])
+@browserBp.route('/search', methods=['POST'])
 def search():
     data = request.get_json()
     query = data.get('query')

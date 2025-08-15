@@ -2,7 +2,7 @@ from configparser import ConfigParser
 import requests
 from . import *
 
-class SteamApp:
+class SteamHandler:
     def __init__(self):
         self.apps = ConfigParser()
         self.apps.read('steam/appId.ini')
@@ -46,8 +46,3 @@ class SteamApp:
     def runGame(self, name):
         id = self.apps.get('apps', name)
         return f'steam://run/{id}'
-
-
-if __name__ == '__main__':
-    steamApp = SteamApp()
-    steamApp.getAppIds(['cyberpunk 2077', "assassin's creed"])

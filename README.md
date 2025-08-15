@@ -52,7 +52,7 @@ pip install -r requirements.txt
 
 ### 📧 E-mails
 
-**`GET /emails/verify_emails`**
+#### `GET /emails/verify_emails`
 
 **Descrição:** Verificar se vc tem novos emails.
 
@@ -63,7 +63,7 @@ pip install -r requirements.txt
 }
 ```
 
-**`GET /emails/read_emails`**
+#### `GET /emails/read_emails`
 
 **Descrição:** Ler os emails novos não lidos.
 
@@ -79,7 +79,7 @@ pip install -r requirements.txt
 
 ### 🌐 Navegador
 
-**`POST /browser/open`**
+#### `POST /browser/open`
 
 **Descrição:** Abrir site específico.
 
@@ -108,7 +108,7 @@ Caso contrário deve manter esse formato:
 }
 ```
 
-**`POST /browser/search`**
+#### `POST /browser/search`
 
 **Descrição:** Pesquisar assunto em determinado site.
 

@@ -28,8 +28,8 @@ class BrowserCommands:
     def __init__(self):
         self.browserHandler = BrowserHandler()
 
-    def openBrowser(self, dados):
-        url = dados.get('site')
+    def openBrowser(self, data):
+        url = data.get('site')
         methods = {
             'youtube': self.browserHandler.youtube,
             'google': self.browserHandler.google,
@@ -38,7 +38,7 @@ class BrowserCommands:
             'chatgpt': self.browserHandler.chatgpt,
         }
         if url == 'email':
-            emailType = dados.get('emailType')
+            emailType = data.get('emailType')
             if emailType not in ['formal', 'jogos']:
                 return {"message": "O tipo de email deve ser 'formal' ou 'jogos'"}
             
@@ -52,8 +52,19 @@ class BrowserCommands:
     def search(self, site, query):
         return {'url': self.browserHandler.search(query, site)}
 
+
+class SteamCommands:
+    def __init__(self):
+        self.steamHandler = SteamHandler()
+
+    def runGame(self, data):
+        name = data.get('name')
+        return {'command': self.steamHandler.runGame(name)}
+    
+
 email_commands = EmailCommands()
 browser_commands = BrowserCommands()
+steam_commands = SteamCommands()
 
 
 app = Flask(__name__)
@@ -68,39 +79,46 @@ def readEmails():
 
 @app.route('/browser/open', methods=['POST'])
 def openBrowser():
-    dados = request.get_json()
-    if 'site' in dados:
+    data = request.get_json()
+
+    chavesExtras = all(key in ['site', 'emailType'] for key in data.keys())
+    chavesFaltando = all(key in data.keys() for key in ['site', 'emailType'])
+
+    if 'site' not in data:
         return jsonify({'message': 'você não disse o site.'}), 400
+    
+    elif not chavesExtras and chavesFaltando:
+        return jsonify({'message': ''})
         
-    elif dados['site'] == 'email' and any(key not in dados for key in ['site', 'emailType']):
+    elif data['site'] == 'email' and any(key not in data for key in ['site', 'emailType']):
         return jsonify({'message': 'você não incluiu o tipo do email.'}), 400
         
-    return jsonify(browser_commands.openBrowser(dados)), 200
+    return jsonify(browser_commands.openBrowser(data)), 200
 
 @app.route('/browser/search', methods=['POST'])
 def search():
-    dados = request.get_json()
-    query = dados.get('query')
-    site = dados.get('site')
+    data = request.get_json()
+    query = data.get('query')
+    site = data.get('site')
 
     if query == None:
-        return jsonify({'message': 'Você não incluiu a chave "query" na requisição'}), 400
+        return jsonify({'message': 'você não incluiu a chave "query" na requisição'}), 400
     
     if site == None:
-        return jsonify({'message': 'Você não incluiu a chave "site" na requisição'}), 400
+        return jsonify({'message': 'você não incluiu a chave "site" na requisição'}), 400
     
     if site.lower() not in ['google', 'youtube', 'github']:
-        return jsonify({'message': 'O site deve ser "google", "youtube" ou "github"'}), 400
+        return jsonify({'message': 'o site deve ser "google", "youtube" ou "github"'}), 400
     
     return jsonify(browser_commands.search(site.lower(), query.lower())), 200
 
 @app.route('/steam/run', methods=['POST'])
 def runGame():
     data = request.get_json()
-    if 'gameName' not in data:
-        return jsonify({'message': 'você não incluiu o nome do jogo'})
+    if 'name' not in data:
+        return jsonify({'message': 'você não incluiu o nome do jogo'}), 400
     
-    return jsonify()
+    return jsonify(steam_commands.runGame(data)), 200
 
 if __name__ == "__main__":
     app.run()

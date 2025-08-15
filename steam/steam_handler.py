@@ -26,7 +26,7 @@ class SteamHandler:
         self._saveFile()
         return foundGames
 
-    def getAppId(self, gameNames):
+    def verifyGame(self, gameNames):
         missingGames = set(name.lower() for name in gameNames)
         foundGames = self.addGame(gameNames)
 
@@ -34,7 +34,7 @@ class SteamHandler:
         if missingGames:
             return list(missingGames)
         
-        return list(missingGames)
+        return {'message': 'jogos adicionados com sucesso'}
     
     def runGame(self, name):
         name = name.replace(' ', '_')

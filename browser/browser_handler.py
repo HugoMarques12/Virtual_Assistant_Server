@@ -41,8 +41,3 @@ class BrowserHandler:
             return f'https://github.com/search?q={query}&type=repositories'
         
         return f'https://www.google.com/search?q={query}'
-    
-if __name__ == "__main__":
-    browser_handler = BrowserHandler()
-    print(browser_handler.google())
-    print(browser_handler.mangalivre())

@@ -36,6 +36,10 @@ class SteamHandler:
         
         return {'message': 'jogos adicionados com sucesso'}
     
+    def setGame(self,appName, appId):
+        self.apps.set('apps', appName, appId)
+        self._saveFile()
+    
     def runGame(self, name):
         name = name.replace(' ', '_')
         id = self.apps.get('apps', name)

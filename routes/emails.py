@@ -24,12 +24,12 @@ class EmailCommands:
         return {"message": self.emailHandler.getEmails()}
     
 
-email_commands = EmailCommands()
-
 @emailsBp.route('/verify_emails')
 def verifyEmails(): 
+    email_commands = EmailCommands()
     return jsonify(email_commands.verifyEmails()), 200
 
 @emailsBp.route('/read_emails')
 def readEmails():
+    email_commands = EmailCommands()
     return jsonify(email_commands.readEmails()), 200

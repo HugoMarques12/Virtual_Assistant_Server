@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from emails.email_handler import *
+from modules.emails.email_handler import *
 
 
 emailsBp = Blueprint('emails', __name__, url_prefix='/emails')

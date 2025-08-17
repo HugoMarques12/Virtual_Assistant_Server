@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from browser.browser_handler import *
+from modules.browser.browser_handler import *
 
 
 browserBp = Blueprint('browser', __name__, url_prefix='/browser')

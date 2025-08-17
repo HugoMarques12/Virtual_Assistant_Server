@@ -40,16 +40,18 @@ browser_commands = BrowserCommands()
 def openBrowser():
     data = request.get_json()
 
-    extraKeys = all(key in ['site', 'emailType'] for key in data.keys())
-    missingKeys = all(key in data.keys() for key in ['site', 'emailType'])
+    extraKeys = any(key not in ['site', 'emailType'] for key in data.keys())
 
     if 'site' not in data:
         return jsonify({'message': 'você não disse o site.'}), 400
     
-    elif not extraKeys and missingKeys:
-        return jsonify({'message': ''})
+    elif data['site'] != 'email' and extraKeys:
+        return jsonify({'message': 'você incluiu mais dados do que deveria, deve conter apenas a chave site'}), 400
+    
+    elif data['site'] == 'email' and extraKeys:
+        return jsonify({'message': 'você incluiu mais dados do que deveria, deve conter apenas a chave email e site'}), 400
         
-    elif data['site'] == 'email' and any(key not in data for key in ['site', 'emailType']):
+    elif data['site'] == 'email' and all(key in data for key in ['site', 'emailType']):
         return jsonify({'message': 'você não incluiu o tipo do email.'}), 400
         
     return jsonify(browser_commands.openBrowser(data)), 200
@@ -63,10 +65,13 @@ def search():
     if query == None:
         return jsonify({'message': 'você não incluiu a chave "query" na requisição'}), 400
     
-    if site == None:
+    elif site == None:
         return jsonify({'message': 'você não incluiu a chave "site" na requisição'}), 400
     
-    if site.lower() not in ['google', 'youtube', 'github']:
+    elif site.lower() not in ['google', 'youtube', 'github']:
         return jsonify({'message': 'o site deve ser "google", "youtube" ou "github"'}), 400
+    
+    elif any(key not in ['site', 'query'] for key in data.keys()):
+        return jsonify({'message': 'você incluiu mais dados do que deveria, deve conter apenas as chaves site e query'}), 400
     
     return jsonify(browser_commands.search(site.lower(), query.lower())), 200
